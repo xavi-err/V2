@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Propose Day 💍</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(180deg,#ffe6eb,#fff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.container{
+  width:90%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+.cute-msg{
+  font-size:1rem;
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+button{
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin:0.5rem;
+  transition: transform 0.2s ease;
+  position:relative;
+}
+button:hover{transform:translateY(-2px);}
+
+img.custom-img{
+  width:200px;
+  max-width:80%;
+  border-radius:15px;
+  margin-top:1rem;
+}
+
+/* floating hearts */
+.heart-bg{
+  position:absolute;
+  user-select:none;
+  font-size:1.2rem;
+  top:-20px;
+  animation:floatHeart linear infinite;
+}
+@keyframes floatHeart{
+  0%{transform:translateY(0) rotate(0deg);opacity:1;}
+  100%{transform:translateY(100vh) rotate(360deg);opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div id="bgContainer"></div>
+
+<div class="container" id="container">
+  <!-- Screen 1 -->
+  <h1>I’ve been meaning to ask you something… </h1>
+  <div class="cute-msg">This is important 🥺</div>
+  <button id="nextBtn">Continue</button>
+</div>
+
+<script>
+const container=document.getElementById('container');
+const bgContainer=document.getElementById('bgContainer');
+let screen=1;
+
+// create floating hearts
+for(let i=0;i<30;i++){
+  const heart=document.createElement('div');
+  heart.className='heart-bg';
+  heart.style.left=Math.random()*100+'%';
+  heart.style.fontSize=(10+Math.random()*20)+'px';
+  heart.style.color=Math.random()>0.5?'#ff6b81':'#ff1d48';
+  heart.style.animationDuration=(5+Math.random()*5)+'s';
+  heart.innerText='❤️';
+  bgContainer.appendChild(heart);
+}
+
+// Screen navigation
+document.getElementById('nextBtn').onclick=()=>{
+  screen=2;
+  container.innerHTML=`
+    <h1>Will you be walk this life with me ?</h1>
+    <div class="cute-msg">Please say yes 🥺</div>
+    <button id="yesBtn">Yes 💖</button>
+    <button id="noBtn">No 🙃</button>
+  `;
+
+  const yesBtn=document.getElementById('yesBtn');
+  const noBtn=document.getElementById('noBtn');
+
+  // No button dodges on hover
+  noBtn.addEventListener('mouseover',()=>{
+    const x=Math.random()*200-100;
+    const y=Math.random()*50-25;
+    noBtn.style.transform=`translate(${x}px, ${y}px)`;
+  });
+
+  yesBtn.onclick=()=>{
+    screen=3;
+    container.innerHTML=`
+      <h1>I already knew the answer 😜😘💕</h1>
+      <div class="cute-msg">You make me the happiest person 💖</div>
+      <button id="showImgBtn">See something special 🌟</button>
+    `;
+
+    document.getElementById('showImgBtn').onclick=()=>{
+      screen=4;
+      container.innerHTML=`
+        <h1>For you ❤️<br>
+           <Br> I </h1>
+        <img class="custom-img" src="i-love-u-cute-couple-cat-jkxwenose39r3iig.gif" alt="Your special image">
+      `;
+    };
+  };
+};
+</script>
+</body>
+</html>

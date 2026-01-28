@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine's Day ❤️</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:#ffe6eb;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.card{
+  background:white;
+  padding:2rem;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+  text-align:center;
+  width:95%;
+  max-width:600px;
+  position:relative;
+  z-index:2;
+}
+
+h1{color:#e11d48;margin-bottom:1rem;font-size:1.8rem;}
+p{color:#555;margin-bottom:1.5rem;font-size:1rem;}
+
+button{
+  border:none;
+  padding:0.8rem 1.5rem;
+  border-radius:999px;
+  cursor:pointer;
+  margin:0.3rem;
+  font-size:1.1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 15px rgba(0,0,0,0.15);}
+#nextBtn{background:#22c55e;color:white;}
+
+.bg-heart,.bg-star,.bg-balloon,.bg-kiss{
+  position:absolute;
+  user-select:none;
+  z-index:1;
+  pointer-events:none;
+  animation:float 8s linear infinite;
+}
+.bg-heart{color:red;}
+.bg-star{color:gold;}
+.bg-balloon{}
+.bg-kiss{color:pink;}
+
+@keyframes float{
+  0%{transform:translateY(100vh) rotate(0deg);opacity:0.7;}
+  100%{transform:translateY(-10vh) rotate(360deg);opacity:0.7;}
+}
+
+/* Love letter style */
+.love-letter{
+  background:#fff0e6;
+  border:2px solid #e11d48;
+  border-radius:20px;
+  padding:2rem;
+  text-align:left;
+  line-height:1.8;
+  color:#b91c1c;
+  margin-top:1rem;
+  font-size:1.1rem;
+}
+.love-letter h2{
+  text-align:center;
+  margin-bottom:1rem;
+  color:#e11d48;
+  font-size:1.5rem;
+}
+video{
+  width:50%;
+  max-width:300px;
+  border-radius:15px;
+  margin-top:1rem;
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <h1>Happy Valentine's Day 💌</h1>
+  <p>Click below to open your special letter!</p>
+  <button id="startBtn">Open 💖</button>
+</div>
+
+<script>
+const card=document.getElementById('card');
+
+function createFloating(type,count){
+  for(let i=0;i<count;i++){
+    const elem=document.createElement('div');
+    elem.className=type;
+    elem.style.left=Math.random()*100+'vw';
+    elem.style.top=Math.random()*100+'vh';
+    elem.style.fontSize=(15+Math.random()*20)+'px';
+    elem.style.animationDuration=(5+Math.random()*5)+'s';
+    if(type==='bg-heart') elem.innerText=Math.random()>0.5?'❤️':'💗';
+    else if(type==='bg-star') elem.innerText='✨';
+    else if(type==='bg-balloon') elem.innerText='🎈';
+    else if(type==='bg-kiss') elem.innerText='💋';
+    document.body.appendChild(elem);
+  }
+}
+
+// Screen 1: Envelope intro
+function screen1(){
+  card.innerHTML='';
+  const h1=document.createElement('h1');
+  h1.innerText='💌 A Special Letter';
+  const p=document.createElement('p');
+  p.innerText='Click next to unfold it!';
+  const btn=document.createElement('button');
+  btn.id='nextBtn';
+  btn.innerText='Next';
+  btn.onclick=screen2;
+  card.appendChild(h1);
+  card.appendChild(p);
+  card.appendChild(btn);
+}
+
+// Screen 2: Love letter content
+function screen2(){
+  card.innerHTML='';
+  const h1=document.createElement('h1');
+  h1.innerText='Your Love Letter 💌';
+  
+  const letter=document.createElement('div');
+  letter.className='love-letter';
+  letter.innerHTML=`
+    <h2>To Meri Pukuuuu ❤️</h2>
+    <p>
+      From the moment I saw you I knew you were different.<br>
+      But I never imagined that you would be so special,<br>
+      I didn't even think we would be together.<br>
+      I may not be the best person you could have, and I am bad at<br>
+      so many things, not the brightest, not the best at making you<br>
+      feel loved or understood. I am sooorryyy my loveee.<br>
+      But, I will always love you, cherish you, and stand by you.<br>
+      You bring joy, laughter, and warmth into my life every day.<br>
+      No matter what challenges come, I will never leave your side.<br>
+      I promise to support you, listen to you, and make you smile.<br>
+      You are my everything, my reason to be happy, my heart.<br>
+      Forever and always, I am yours completely.<br>
+      I love you more than words can express, today, tomorrow, and for all time.<br>
+      I hope every day we share brings you as much happiness as you bring me.<br>
+      💖 I lovvvveeeeeee youuuu pukuuuuuuuu 😘😘😘😘😘
+    </p>
+  `;
+  
+  const btn=document.createElement('button');
+  btn.id='nextBtn';
+  btn.innerText='Next 💘';
+  btn.onclick=screen3;
+
+  card.appendChild(h1);
+  card.appendChild(letter);
+  card.appendChild(btn);
+}
+
+// Screen 3: Celebration with video
+function screen3(){
+  card.innerHTML='';
+  const h1=document.createElement('h1');
+  h1.innerText='I choose you. Every day 💘';
+  card.appendChild(h1);
+
+  // Add portrait-oriented video
+  const video=document.createElement('video');
+  video.src='5.mp4'; // Replace with your video
+  video.controls=true;
+  video.autoplay=true;
+  video.muted=false;
+  video.loop=false;
+  card.appendChild(video);
+
+  // Floating elements
+  createFloating('bg-heart',50);
+  createFloating('bg-star',30);
+  createFloating('bg-balloon',20);
+  createFloating('bg-kiss',40);
+}
+
+document.getElementById('startBtn').onclick=screen1;
+</script>
+
+</body>
+</html>

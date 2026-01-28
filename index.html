@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Days of Valentine 💖</title>
+
+<meta property="og:title" content="7 Days of Valentine 💖">
+<meta property="og:description" content="A little surprise for every special Valentine day 💌">
+<meta property="og:type" content="website">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,#ffe6eb,#fff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.container{
+  width:90%;
+  max-width:420px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  text-align:center;
+}
+
+h1{color:#e11d48;margin-bottom:1rem}
+
+.days{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:1rem;
+}
+
+.day{
+  padding:1rem;
+  border-radius:15px;
+  background:#f1f5f9;
+  cursor:not-allowed;
+  transition:.3s;
+  text-align:center;
+}
+
+.day.unlocked{
+  background:#ffe4e6;
+  cursor:pointer;
+}
+
+.day.unlocked:hover{
+  transform:translateY(-4px);
+}
+
+.lock{font-size:1.6rem}
+.title{font-weight:600;margin-top:.3rem}
+.date{font-size:.8rem;color:#555;text-align:center;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>7 Days of Valentine 💖</h1>
+  <div class="days" id="days"></div>
+</div>
+
+<script>
+const TEST_MODE = true; // set false later
+
+const today = new Date();
+today.setHours(0,0,0,0);
+const year = today.getFullYear();
+
+// Each day now links to a separate HTML file
+const daysData = [
+  { title:"Rose Day 🌹", date:new Date(year,1,7), link:"day1.html" },
+  { title:"Propose Day 💍", date:new Date(year,1,8), link:"day2.html" },
+  { title:"Chocolate Day 🍫", date:new Date(year,1,9), link:"day3.html" },
+  { title:"Teddy Day 🧸", date:new Date(year,1,10), link:"day4.html" },
+  { title:"Promise Day 🤞", date:new Date(year,1,11), link:"day5.html" },
+  { title:"Hug Day 🤗", date:new Date(year,1,12), link:"day6.html" },
+  { title:"Kiss Day 😘", date:new Date(year,1,13), link:"day7.html" },
+  { title:"Valentine’s Day ❤️", date:new Date(year,1,14), link:"valentine.html" }
+];
+
+const daysContainer=document.getElementById("days");
+
+daysData.forEach(day=>{
+  const div=document.createElement("div");
+  div.className="day";
+
+  if(TEST_MODE || today>=day.date){
+    div.classList.add("unlocked");
+    div.innerHTML=`
+      <div class="lock">❤️</div>
+      <div class="title">${day.title}</div>
+      <div class="date">Open now</div>
+    `;
+    div.onclick=()=>{ window.location.href = day.link; };
+  }else{
+    div.innerHTML=`
+      <div class="lock">🔒</div>
+      <div class="title">${day.title}</div>
+      <div class="date">Opens on ${day.date.toDateString()}</div>
+    `;
+  }
+
+  daysContainer.appendChild(div);
+});
+</script>
+
+</body>
+</html>

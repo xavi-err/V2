@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rose Day 🌹</title>
+
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg,#ffe6eb,#fff);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* floating rose petals background */
+.rose-bg {
+  position: absolute;
+  font-size: 1.2rem;
+  top: -20px;
+  user-select: none;
+  animation: floatPetal linear infinite;
+}
+@keyframes floatPetal {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.container {
+  width: 90%;
+  max-width: 400px;
+  background: white;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  color: #e11d48;
+  margin-bottom: 1rem;
+}
+
+.cute-msg {
+  font-size: 1rem;
+  color: #e11d48;
+  margin-bottom: 1rem;
+}
+
+img.rose-img, img.final-img {
+  width: 150px;
+  max-width: 80%;
+  margin: 1rem auto;
+  display: block;
+  border-radius: 15px;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  border: none;
+  background: #22c55e;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 0.5rem;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+button:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<div id="bgContainer"></div>
+
+<div class="container" id="container">
+  <!-- Screen 1 -->
+  <h1>A rose for you 🌹</h1>
+  <div class="cute-msg">You are the most special person to me ❤️</div>
+  <img class="rose-img" src="download.png" alt="Rose Image">
+  <button id="takeBtn">Take it</button>
+</div>
+
+<script>
+const container = document.getElementById('container');
+const bgContainer = document.getElementById('bgContainer');
+let screen = 1;
+
+// create floating roses in background
+function createFloatingRoses(parent, count=30) {
+  for (let i=0; i<count; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'rose-bg';
+    petal.style.left = Math.random() * 100 + '%';
+    petal.style.fontSize = (10 + Math.random()*20) + 'px';
+    petal.style.color = Math.random() > 0.5 ? 'pink' : 'red';
+    petal.style.animationDuration = (5 + Math.random()*5) + 's';
+    petal.innerText = '🌹';
+    parent.appendChild(petal);
+  }
+}
+createFloatingRoses(bgContainer);
+
+// Screen 1 -> Screen 2
+document.getElementById('takeBtn').onclick = () => {
+  screen = 2;
+  container.innerHTML = `
+    <h1>Watch it 🌹</h1>
+    <div class="cute-msg">So pretty, isn’t it? 🥰</div>
+    <img class="rose-img" src="download.jpeg" alt="Rose Image">
+    <button id="smellBtn">Smell it 🌸</button>
+    <button id="ignoreBtn">Ignore 🙃</button>
+    <div id="crying" style="font-size:2rem;margin-top:10px;display:none;">😭</div>
+  `;
+
+  const smellBtn = document.getElementById('smellBtn');
+  const ignoreBtn = document.getElementById('ignoreBtn');
+  const crying = document.getElementById('crying');
+
+  // Smell it -> Screen 3
+  smellBtn.onclick = () => {
+    container.innerHTML = `
+      <h1>Here it is for you 💌</h1>
+      <div class="cute-msg">You deserve this and more ❤️</div>
+      <img class="final-img" src="rose-bloom.gif" alt="Gift Image">
+    `;
+  };
+
+  // Ignore -> button runs away on hover + crying
+  ignoreBtn.addEventListener('mouseover', () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 50 - 25;
+    ignoreBtn.style.transform = `translate(${x}px, ${y}px)`;
+    crying.style.display = 'block';
+  });
+};
+</script>
+
+</body>
+</html>

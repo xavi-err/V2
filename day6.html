@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hug Day 🤗</title>
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg,#ffe6e0,#fff8f0);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+/* floating hearts for hug day */
+.heart-bg {
+  position:absolute;
+  font-size:1.2rem;
+  top:-20px;
+  user-select:none;
+  animation:floatHeart linear infinite;
+  pointer-events:none;
+}
+@keyframes floatHeart {
+  0% { transform: translateY(0) rotate(0deg); opacity:1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+}
+
+.container {
+  width:90%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+h1 {
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+.cute-msg {
+  font-size:1rem;
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+button {
+  padding:0.6rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin:0.5rem;
+  transition: transform 0.2s ease;
+}
+button:hover { transform: translateY(-2px); }
+
+#maybeBtn { background:#f87171; }
+#hugBtn { background:#22c55e; }
+
+video {
+  width:100%;
+  max-width:350px;
+  border-radius:15px;
+  margin-top:1rem;
+}
+</style>
+</head>
+<body>
+
+<div id="bgContainer"></div>
+
+<div class="container" id="container">
+  <!-- Screen 1 -->
+  <h1>Can I give you a warm hug? 🤗</h1>
+  <div class="cute-msg">A hug just for you 💖</div>
+  <button id="nextBtn">Next</button>
+</div>
+
+<script>
+const container = document.getElementById('container');
+const bgContainer = document.getElementById('bgContainer');
+let screen = 1;
+
+// create floating hearts in the background
+for (let i=0; i<30; i++){
+  const heart = document.createElement('div');
+  heart.className='heart-bg';
+  heart.style.left=Math.random()*100+'%';
+  heart.style.fontSize=(15 + Math.random()*20)+'px';
+  heart.style.color=Math.random()>0.5 ? 'pink' : 'red';
+  heart.style.animationDuration=(5 + Math.random()*5)+'s';
+  heart.innerText='❤️';
+  bgContainer.appendChild(heart);
+}
+
+// Screen transitions
+document.getElementById('nextBtn').onclick = () => {
+  screen = 2;
+  container.innerHTML = `
+    <h1>Do you want a hug? 🤗</h1>
+    <div class="cute-msg">Choose wisely…</div>
+    <button id="hugBtn">Yes</button>
+    <button id="maybeBtn">Maybe later</button>
+  `;
+
+  const maybeBtn = document.getElementById('maybeBtn');
+  const hugBtn = document.getElementById('hugBtn');
+
+  // maybeBtn runs away when hovered
+  maybeBtn.addEventListener('mouseover', () => {
+    const x = Math.random()*200 - 100;
+    const y = Math.random()*200 - 100;
+    maybeBtn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+
+  hugBtn.onclick = showScreen3;
+  maybeBtn.onclick = showScreen3; // optional: also allow click
+};
+
+// Screen 3 - final hug video + message
+function showScreen3(){
+  screen = 3;
+  container.innerHTML = `
+    <h1>Here’s your hug! 🤗</h1>
+    <div class="cute-msg">
+      I will always love you ❤️<br>
+      I will always be yours 💕<br>
+      I will never leave 💖
+    </div>
+    <video autoplay loop playsinline>
+      <source src="3.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  `;
+}
+</script>
+
+</body>
+</html>

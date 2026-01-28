@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chocolate Day 🍫</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(180deg,#fff0e6,#fff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.container{
+  width:90%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+.cute-msg{
+  font-size:1rem;
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+button{
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin-top:1rem;
+  transition: transform 0.2s ease;
+}
+button:hover{transform:translateY(-2px);}
+
+.floating-chocolate{
+  position:absolute;
+  user-select:none;
+  font-size:1.2rem;
+  top:-20px;
+  animation:floatChoco linear infinite;
+}
+@keyframes floatChoco{
+  0%{transform:translateY(0) rotate(0deg);opacity:1;}
+  100%{transform:translateY(100vh) rotate(360deg);opacity:0;}
+}
+
+</style>
+</head>
+<body>
+
+<div id="bgContainer"></div>
+
+<div class="container" id="container">
+  <h1>Happy Chocolate Day 🍫</h1>
+  <div class="cute-msg">Wishing you a sweet day!</div>
+  <button id="nextBtn">Next 🍫</button>
+</div>
+
+<script>
+const container=document.getElementById('container');
+const bgContainer=document.getElementById('bgContainer');
+let screen=1;
+
+// create floating chocolates in background (hidden initially)
+function createFloatingChocolates(count=20){
+  for(let i=0;i<count;i++){
+    const choco=document.createElement('div');
+    choco.className='floating-chocolate';
+    choco.style.left=Math.random()*100+'%';
+    choco.style.fontSize=(10+Math.random()*20)+'px';
+    choco.style.color=Math.random()>0.5?'#d2691e':'#ff1d48';
+    choco.style.animationDuration=(3+Math.random()*5)+'s';
+    choco.innerText='🍫';
+    bgContainer.appendChild(choco);
+  }
+}
+
+document.getElementById('nextBtn').onclick=()=>{
+  if(screen===1){
+    screen=2;
+    container.innerHTML=`
+      <h1>Sweet Treat 🍬</h1>
+      <div class="cute-msg">the sweetest treat I got is you ❤️</div>
+      <button id="nextBtn">Next 🍫</button>
+    `;
+    document.getElementById('nextBtn').onclick=()=>document.getElementById('nextBtn').click();
+    document.getElementById('nextBtn').onclick=nextScreen;
+  }else nextScreen();
+};
+
+function nextScreen(){
+  if(screen===2){
+    screen=3;
+    container.innerHTML=`
+      <h1>Oops! 🍫</h1>
+      <div class="cute-msg">I’m sorry I don’t have chocolate now 😔 I’ll get you some later!</div>
+    `;
+    createFloatingChocolates(25);
+  }
+}
+</script>
+
+</body>
+</html>

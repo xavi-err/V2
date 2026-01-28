@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promise Day 🤞</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(180deg,#ffe6eb,#fff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+.container{
+  width:90%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+h1{color:#e11d48;margin-bottom:1rem;}
+.cute-msg{font-size:1rem;color:#e11d48;margin-bottom:1rem;}
+button{
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin-top:1rem;
+  transition: transform 0.2s ease, left 0.3s ease, top 0.3s ease;
+  position: relative;
+}
+button:hover{transform:translateY(-2px);}
+.floating-heart{
+  position:absolute;
+  user-select:none;
+  font-size:1.5rem;
+  top:-30px;
+  animation:floatHeart linear infinite;
+}
+@keyframes floatHeart{
+  0%{transform:translateY(0) rotate(0deg);opacity:1;}
+  100%{transform:translateY(100vh) rotate(360deg);opacity:0;}
+}
+.promise-line{
+  opacity:0;
+  transition: opacity 0.6s ease;
+  margin-bottom:0.8rem;
+  font-size:1rem;
+  color:#e11d48;
+}
+</style>
+</head>
+<body>
+
+<div id="bgContainer"></div>
+
+<div class="container" id="container">
+  <!-- Screen 1 -->
+  <h1>I wanna say somethings 🤞</h1>
+  <div class="cute-msg">I really mean it ❤️</div>
+  <button id="nextBtn">Next 🤞</button>
+</div>
+
+<script>
+const container=document.getElementById('container');
+const bgContainer=document.getElementById('bgContainer');
+let screen=1;
+
+document.getElementById('nextBtn').onclick=()=>{
+  if(screen===1){
+    screen=2;
+    container.innerHTML=`
+      <h1>Promise Time 💌</h1>
+      <div class="cute-msg">Will you listen? 🤗</div>
+      <button id="listenBtn">Listen 👂</button>
+      <button id="maybeBtn">Maybe later 🙃</button>
+    `;
+    document.getElementById('listenBtn').onclick=showScreen3;
+
+    const maybeBtn = document.getElementById('maybeBtn');
+
+    // Function to randomly move the button
+    function moveButton(){
+      const x = Math.random()*60-30; // move left/right
+      const y = Math.random()*40-20; // move up/down
+      maybeBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    maybeBtn.addEventListener('mouseover', moveButton);
+    maybeBtn.addEventListener('click', moveButton);
+  }
+};
+
+function showScreen3(){
+  screen=3;
+  container.innerHTML=`
+    <h1>My Promises ❤️</h1>
+    <div id="promises"></div>
+  `;
+  createFloatingHearts(25);
+
+  const promises=[
+    "I will always support you 🤗",
+    "I will make you smile 😊",
+    "I will cherish every moment together 💕",
+    "I will always love you ❤️",
+    "I will always be yours 💌",
+    "I will never leave you 🤞"
+  ];
+  
+  const promContainer=document.getElementById('promises');
+  let i=0;
+
+  function showNext(){
+    if(i<promises.length){
+      const p=document.createElement('div');
+      p.className='promise-line';
+      p.innerText=promises[i];
+      promContainer.appendChild(p);
+      setTimeout(()=>{p.style.opacity=1;},100);
+      i++;
+      setTimeout(showNext,800);
+    }
+  }
+  showNext();
+}
+
+// floating hearts
+function createFloatingHearts(count=20){
+  for(let i=0;i<count;i++){
+    const heart=document.createElement('div');
+    heart.className='floating-heart';
+    heart.style.left=Math.random()*100+'%';
+    heart.style.fontSize=(15+Math.random()*20)+'px';
+    heart.style.color=Math.random()>0.5?'#ff4d6d':'#ff85a2';
+    heart.style.animationDuration=(3+Math.random()*5)+'s';
+    heart.innerText='❤️';
+    bgContainer.appendChild(heart);
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teddy Day 🧸</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',sans-serif;
+  background: linear-gradient(180deg,#fff0f5,#fff);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
+}
+
+.container{
+  width:90%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,.15);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+.cute-msg{
+  font-size:1rem;
+  color:#e11d48;
+  margin-bottom:1rem;
+}
+
+button{
+  padding:.6rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin-top:1rem;
+  transition: transform 0.2s ease;
+}
+button:hover{transform:translateY(-2px);}
+
+.teddy-img{
+  width:150px;
+  max-width:70%;
+  display:block;
+  margin:1rem auto;
+  transition: transform 0.3s ease;
+  cursor:pointer;
+}
+
+.teddy-img:hover{
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.floating-teddy{
+  position:absolute;
+  user-select:none;
+  font-size:1.5rem;
+  top:-30px;
+  animation:floatTeddy linear infinite;
+}
+@keyframes floatTeddy{
+  0%{transform:translateY(0) rotate(0deg);opacity:1;}
+  100%{transform:translateY(100vh) rotate(360deg);opacity:0;}
+}
+</style>
+</head>
+<body>
+
+<div id="bgContainer"></div>
+
+<div class="container" id="container">
+  <!-- Screen 1 -->
+  <h1>I got you something… 🧸</h1>
+  <div class="cute-msg">Can you guess what it is? 🥰</div>
+  <button id="nextBtn">Next 🧸</button>
+</div>
+
+<script>
+const container=document.getElementById('container');
+const bgContainer=document.getElementById('bgContainer');
+let screen=1;
+
+// Replace with your image filenames or URLs
+const teddyImage1 = "WhatsApp Image 2026-01-28 at 3.41.09 PM.jpeg";
+const teddyImage2 = "2.jpeg";
+
+// Screen 2 & 3
+document.getElementById('nextBtn').onclick=()=>{
+  if(screen===1){
+    screen=2;
+    container.innerHTML=`
+      <h1>Peek-a-boo! 🧸</h1>
+      <div class="cute-msg">Look who's here! 🤗</div>
+      <img src="${teddyImage1}" alt="Teddy" class="teddy-img" id="teddyImg">
+      <button id="nextBtn">Next 🧸</button>
+    `;
+
+    // Change image on hover or click
+    const teddyImg = document.getElementById('teddyImg');
+    teddyImg.addEventListener('mouseenter',()=>teddyImg.src=teddyImage2);
+    teddyImg.addEventListener('mouseleave',()=>teddyImg.src=teddyImage1);
+    teddyImg.addEventListener('click',()=>teddyImg.src=teddyImage2);
+
+    document.getElementById('nextBtn').onclick=nextScreen;
+  }
+};
+
+function nextScreen(){
+  if(screen===2){
+    screen=3;
+    container.innerHTML=`
+      <h1>Whenever you need comfort 💖</h1>
+      <div class="cute-msg">I’m always here for you 🧸</div>
+    `;
+    createFloatingTeddies(25);
+  }
+}
+
+// floating teddies
+function createFloatingTeddies(count=20){
+  for(let i=0;i<count;i++){
+    const teddy=document.createElement('div');
+    teddy.className='floating-teddy';
+    teddy.style.left=Math.random()*100+'%';
+    teddy.style.fontSize=(20+Math.random()*20)+'px';
+    teddy.style.color=Math.random()>0.5?'#d2691e':'#ff69b4';
+    teddy.style.animationDuration=(3+Math.random()*5)+'s';
+    teddy.innerText='🧸';
+    bgContainer.appendChild(teddy);
+  }
+}
+</script>
+
+</body>
+</html>
