@@ -84,7 +84,7 @@ button:hover{transform:translateY(-2px);}
 <div id="bgContainer"></div>
 
 <div class="container" id="container">
-  <!-- Screen 1 -->
+  
   <h1>I got you something… 🧸</h1>
   <div class="cute-msg">Can you guess what it is? 🥰</div>
   <button id="nextBtn">Next 🧸</button>
@@ -95,11 +95,9 @@ const container=document.getElementById('container');
 const bgContainer=document.getElementById('bgContainer');
 let screen=1;
 
-// Replace with your image filenames or URLs
 const teddyImage1 = "WhatsApp Image 2026-01-28 at 3.41.09 PM.jpeg";
 const teddyImage2 = "2.jpeg";
 
-// Screen 2 & 3
 document.getElementById('nextBtn').onclick=()=>{
   if(screen===1){
     screen=2;
@@ -110,7 +108,7 @@ document.getElementById('nextBtn').onclick=()=>{
       <button id="nextBtn">Next 🧸</button>
     `;
 
-    // Change image on hover or click
+
     const teddyImg = document.getElementById('teddyImg');
     teddyImg.addEventListener('mouseenter',()=>teddyImg.src=teddyImage2);
     teddyImg.addEventListener('mouseleave',()=>teddyImg.src=teddyImage1);
@@ -131,7 +129,6 @@ function nextScreen(){
   }
 }
 
-// floating teddies
 function createFloatingTeddies(count=20){
   for(let i=0;i<count;i++){
     const teddy=document.createElement('div');
@@ -148,3 +145,4 @@ function createFloatingTeddies(count=20){
 
 </body>
 </html>
+
