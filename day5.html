@@ -67,7 +67,7 @@ button:hover{transform:translateY(-2px);}
 <div id="bgContainer"></div>
 
 <div class="container" id="container">
-  <!-- Screen 1 -->
+
   <h1>I wanna say somethings 🤞</h1>
   <div class="cute-msg">I really mean it ❤️</div>
   <button id="nextBtn">Next 🤞</button>
@@ -91,10 +91,10 @@ document.getElementById('nextBtn').onclick=()=>{
 
     const maybeBtn = document.getElementById('maybeBtn');
 
-    // Function to randomly move the button
+    
     function moveButton(){
-      const x = Math.random()*60-30; // move left/right
-      const y = Math.random()*40-20; // move up/down
+      const x = Math.random()*60-30; 
+      const y = Math.random()*40-20; 
       maybeBtn.style.transform = `translate(${x}px, ${y}px)`;
     }
 
@@ -137,7 +137,7 @@ function showScreen3(){
   showNext();
 }
 
-// floating hearts
+
 function createFloatingHearts(count=20){
   for(let i=0;i<count;i++){
     const heart=document.createElement('div');
@@ -154,3 +154,4 @@ function createFloatingHearts(count=20){
 
 </body>
 </html>
+
