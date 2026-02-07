@@ -61,7 +61,7 @@ button:hover{transform:translateY(-2px);box-shadow:0 8px 15px rgba(0,0,0,0.15);}
   100%{transform:translateY(-10vh) rotate(360deg);opacity:0.7;}
 }
 
-/* Love letter style */
+
 .love-letter{
   background:#fff0e6;
   border:2px solid #e11d48;
@@ -117,7 +117,7 @@ function createFloating(type,count){
   }
 }
 
-// Screen 1: Envelope intro
+
 function screen1(){
   card.innerHTML='';
   const h1=document.createElement('h1');
@@ -133,7 +133,7 @@ function screen1(){
   card.appendChild(btn);
 }
 
-// Screen 2: Love letter content
+
 function screen2(){
   card.innerHTML='';
   const h1=document.createElement('h1');
@@ -172,23 +172,23 @@ function screen2(){
   card.appendChild(btn);
 }
 
-// Screen 3: Celebration with video
+
 function screen3(){
   card.innerHTML='';
   const h1=document.createElement('h1');
   h1.innerText='I choose you. Every day 💘';
   card.appendChild(h1);
 
-  // Add portrait-oriented video
+
   const video=document.createElement('video');
-  video.src='5.mp4'; // Replace with your video
+  video.src='5.mp4';
   video.controls=true;
   video.autoplay=true;
   video.muted=false;
   video.loop=false;
   card.appendChild(video);
 
-  // Floating elements
+ 
   createFloating('bg-heart',50);
   createFloating('bg-star',30);
   createFloating('bg-balloon',20);
@@ -200,3 +200,4 @@ document.getElementById('startBtn').onclick=screen1;
 
 </body>
 </html>
+
