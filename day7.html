@@ -4,57 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kiss Day 😘</title>
-<script>
-const container = document.getElementById('container');
-const bgContainer = document.getElementById('bgContainer');
-let screen = 1;
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
 
-for (let i = 0; i < 30; i++) {
-  const kiss = document.createElement('div');
-  kiss.className = 'kiss-bg';
-  kiss.style.left = Math.random() * 100 + '%';
-  kiss.style.fontSize = (15 + Math.random() * 20) + 'px';
-  kiss.style.color = Math.random() > 0.5 ? '#ff7eb9' : '#ff3d5a';
-  kiss.style.animationDuration = (5 + Math.random() * 5) + 's';
-  kiss.innerText = '💋';
-  bgContainer.appendChild(kiss);
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg,#ffe6f0,#fff0f5);
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  position:relative;
 }
 
-document.getElementById('nextBtn').onclick = () => {
-  screen = 2;
-  container.innerHTML = `
-    <h1>Do you want a kiss? 😘</h1>
-    <div class="cute-msg">Choose wisely…</div>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-  `;
 
-  const noBtn = document.getElementById('noBtn');
-  const yesBtn = document.getElementById('yesBtn');
+.kiss-bg {
+  position:absolute;
+  font-size:1.2rem;
+  top:-20px;
+  user-select:none;
+  animation:floatKiss linear infinite;
+  pointer-events:none;
+}
+@keyframes floatKiss {
+  0% { transform: translateY(0) rotate(0deg); opacity:1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity:0; }
+}
 
-  noBtn.addEventListener('mouseover', () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 200 - 100;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-  });
+.container {
+  width:90%;
+  max-width:400px;
+  background:white;
+  border-radius:20px;
+  padding:1.5rem;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
 
-  yesBtn.onclick = showScreen3;
-  noBtn.onclick = showScreen3;
+h1 {
+  color:#e11d48;
+  margin-bottom:1rem;
+}
 
-  function showScreen3() {
-    screen = 3;
-    container.innerHTML = `
-      <h1>That one was just for you 😘</h1>
-      <div class="cute-msg">I lovvvvvvveeeeeeee yooouuuuu pukuuuuu ❤️</div>
-      <video controls autoplay loop>
-        <source src="4.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-    `;
-  }
-};  <!-- ⭐ THIS closing brace was missing -->
-</script>
+.cute-msg {
+  font-size:1rem;
+  color:#e11d48;
+  margin-bottom:1rem;
+}
 
+button {
+  padding:0.6rem 1.2rem;
+  border-radius:999px;
+  border:none;
+  background:#22c55e;
+  color:white;
+  font-size:1rem;
+  cursor:pointer;
+  margin:0.5rem;
+  transition: transform 0.2s ease;
+}
+button:hover { transform: translateY(-2px); }
+
+#noBtn { background:#f87171; }
+#yesBtn { background:#22c55e; }
+
+video { width:100%; border-radius:15px; margin-top:1rem; }
+</style>
 </head>
 <body>
 
@@ -91,7 +109,7 @@ document.getElementById('nextBtn').onclick = () => {
     <div class="cute-msg">Choose wisely…</div>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
-  `;
+  `;}
 
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
@@ -122,4 +140,4 @@ function showScreen3(){
 </body>
 </html>
 
-
+the next is not working
