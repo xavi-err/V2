@@ -109,18 +109,18 @@ document.getElementById('nextBtn').onclick = () => {
     <div class="cute-msg">Choose wisely…</div>
     <button id="yesBtn">Yes</button>
     <button id="noBtn">No</button>
-  `;}
+  `;
 
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
-
+}
 
   noBtn.addEventListener('mouseover', () => {
     const x = Math.random()*200 - 100;
     const y = Math.random()*200 - 100;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
-  }
+  
 
   yesBtn.onclick = showScreen3;
   noBtn.onclick = showScreen3; 
@@ -140,3 +140,4 @@ function showScreen3(){
 
 </body>
 </html>
+
