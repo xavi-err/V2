@@ -18,7 +18,7 @@ body {
   position:relative;
 }
 
-
+/* Floating kisses background */
 .kiss-bg {
   position:absolute;
   font-size:1.2rem;
@@ -79,7 +79,7 @@ video { width:100%; border-radius:15px; margin-top:1rem; }
 <div id="bgContainer"></div>
 
 <div class="container" id="container">
- 
+  <!-- Screen 1 -->
   <h1>Come a little closer… 😘</h1>
   <div class="cute-msg">I have something special for you 💖</div>
   <button id="nextBtn">Next</button>
@@ -90,6 +90,7 @@ const container = document.getElementById('container');
 const bgContainer = document.getElementById('bgContainer');
 let screen = 1;
 
+// create floating kisses
 for (let i=0; i<30; i++){
   const kiss = document.createElement('div');
   kiss.className='kiss-bg';
@@ -101,7 +102,7 @@ for (let i=0; i<30; i++){
   bgContainer.appendChild(kiss);
 }
 
-
+// Screen transitions
 document.getElementById('nextBtn').onclick = () => {
   screen = 2;
   container.innerHTML = `
@@ -113,25 +114,26 @@ document.getElementById('nextBtn').onclick = () => {
 
   const noBtn = document.getElementById('noBtn');
   const yesBtn = document.getElementById('yesBtn');
-}
 
+  // No button dodges when hovered
   noBtn.addEventListener('mouseover', () => {
     const x = Math.random()*200 - 100;
     const y = Math.random()*200 - 100;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
   });
-  
 
   yesBtn.onclick = showScreen3;
-  noBtn.onclick = showScreen3; 
+  noBtn.onclick = showScreen3; // in case user clicks anyway
+};
 
+// Screen 3 - video + message
 function showScreen3(){
   screen = 3;
   container.innerHTML = `
     <h1>That one was just for you 😘</h1>
-    <div class="cute-msg">I lovvvvvvveeeeeeee yooouuuuu pukuuuuu    ❤️</div>
-    <video controls autoplay loop>
-      <source src="4.mp4" type="video/mp4">
+    <div class="cute-msg">I love you ❤️</div>
+    <video controls autoplay muted loop>
+      <source src="your-kiss-video.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   `;
@@ -140,4 +142,3 @@ function showScreen3(){
 
 </body>
 </html>
-
